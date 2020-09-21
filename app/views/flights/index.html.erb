@@ -3,7 +3,10 @@
 <section class="flight-<%=flight.id%>">
   <p>Flight Number: <%= flight.number %></p>
     <% flight.passengers.each do |passenger| %>
+    <section class="passenger-<%=passenger.id%>">
       <p>Passengers: <%= passenger.name %></p>
+      <%= button_to "Remove Passenger", "/flights/passengers/#{passenger.id}", method: :delete%>
+    </section>
   <% end %>
 </section>
 <% end %>

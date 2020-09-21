@@ -32,4 +32,23 @@ RSpec.describe "When I visit a flight's index page," do
       expect(page).to_not have_content(@passenger_3.name)
     end
   end
+
+  it "I see a link to remove a passenger from a flight and I am returned to '/flight'" do
+    visit "/flights"
+
+    expect(page).to have_content(@flight1.number)
+
+    within ".flight-#{@flight1.id}" do
+      expect(page).to have_content(@passenger_1.name)
+      expect(page).to have_content(@passenger_2.name)
+      expect(page).to_not have_content(@passenger_3.name)
+    end
+
+    within ".passenger-#{@passenger_1.id}" do
+      click_on "Remove Passenger"
+    end
+
+    expect(current_path).to eq("/flights")
+    expect(page).to_not have_content(@passenger_1.name)
+  end
 end
