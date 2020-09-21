@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "When I visit a flight's index page," do
+RSpec.describe "When I visit an airline's show page," do
   before :each do
     @airline1 = Airline.create(name: "Virgin Air")
 
@@ -18,18 +18,18 @@ RSpec.describe "When I visit a flight's index page," do
     FlightPassenger.create(flight_id: @flight2.id, passenger_id: @passenger_3.id)
   end
 
-  it "I see all flight numbers and the names of all that flights passengers" do
-    visit "/flights"
+  it "I see a unique list of passengers that have flights from the airline" do
+    visit "/airlines/#{@airline1.id}"
 
-    expect(page).to have_content(@flight1.number)
-    expect(page).to have_content(@flight2.number)
-    expect(page).to have_content(@flight3.number)
-    expect(page).to have_content(@flight4.number)
-
-    within ".flight-#{@flight1.id}" do
-      expect(page).to have_content(@passenger_1.name)
-      expect(page).to have_content(@passenger_2.name)
-      expect(page).to_not have_content(@passenger_3.name)
-    end
+    expect(page).to have_content(@passenger_1.name)
+    expect(page).to have_content(@passenger_2.name)
+    expect(page).to have_content(@passenger_3.name)
   end
 end
+
+
+
+# User Story 2, Airlines Show Page
+# As a visitor
+# When I visit an airlines show page ('/airlines/:id')
+# I see a unique list of passengers that have flights from that airline
