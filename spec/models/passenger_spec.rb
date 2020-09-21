@@ -27,6 +27,7 @@ RSpec.describe Passenger do
       FlightPassenger.create(flight_id: flight4.id, passenger_id: passenger_3.id)
 
       expect(passenger_1.flight_count).to eq(3)
+      expect(passenger_2.flight_count).to eq(2)
     end
   end
 end
